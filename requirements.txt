@@ -1,0 +1,14 @@
+streamlit
+langchain
+langchain-community
+langchain-core
+langchain-text-splitters
+langchain-huggingface
+langchain-pinecone
+langchain-groq
+pinecone
+sentence-transformers
+pypdf
+beautifulsoup4
+requests
+numpy
