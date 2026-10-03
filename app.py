@@ -1,17 +1,19 @@
 import os
 import streamlit as st
+from dotenv import load_dotenv
 
 st.set_page_config(
     page_title="Space Research Assistant",
     page_icon="🚀",
     layout="wide"
 )
+load_dotenv()
+if os.path.exists(".streamlit/secrets.toml"):
+    if "PINECONE_API_KEY" in st.secrets:
+        os.environ["PINECONE_API_KEY"] = st.secrets["PINECONE_API_KEY"]
+    if "GROQ_API_KEY" in st.secrets:
+        os.environ["GROQ_API_KEY"] = st.secrets["GROQ_API_KEY"]
 
-# Load secrets into environment variables for bot.py to use
-if "PINECONE_API_KEY" in st.secrets:
-    os.environ["PINECONE_API_KEY"] = st.secrets["PINECONE_API_KEY"]
-if "GROQ_API_KEY" in st.secrets:
-    os.environ["GROQ_API_KEY"] = st.secrets["GROQ_API_KEY"]
 
 from bot import rag_chain
 
@@ -55,11 +57,11 @@ st.markdown("""
         color: #dbeafe;
     }
     </style>
-""", unsafe_allowed_html=True)
+""", unsafe_allow_html=True)
 
 # Header Section
-st.markdown('<div class="hero-title">🚀 SPACE RESEARCH ASSISTANT</div>', unsafe_allowed_html=True)
-st.markdown('<div class="hero-sub">Explore the universe • Discover the unknown • Ask anything about space 🌌</div>', unsafe_allowed_html=True)
+st.markdown('<div class="hero-title">🚀 SPACE RESEARCH ASSISTANT</div>', unsafe_allow_html=True)
+st.markdown('<div class="hero-sub">Explore the universe • Discover the unknown • Ask anything about space 🌌</div>', unsafe_allow_html=True)
 
 st.markdown("""
 <div class="badge-container">
@@ -68,7 +70,7 @@ st.markdown("""
     <span class="badge">🧠 RAG Powered</span>
     <span class="badge">🤖 AI Assistant</span>
 </div>
-""", unsafe_allowed_html=True)
+""", unsafe_allow_html=True)
 
 # Initialize Session Chat History
 if "messages" not in st.session_state:
